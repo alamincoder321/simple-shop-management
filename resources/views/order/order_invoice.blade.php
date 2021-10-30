@@ -65,6 +65,7 @@
                         <div class="row" style="border-radius: 0px;">
                             <div class="col-md-3 col-md-offset-9">
                                 <p class="text-right"><b>Sub-total:</b> {{$order->pay}}</p>
+                                <p class="text-right"><b>Payment:</b> {{$order->pay - $order->due}}</p>
                                 <p class="text-right">Due: @if($order->due ===Null) 00 @else {{$order->due}}@endif</p>
                                 <hr>
                                 <h3 class="text-right">Total: {{$order->pay}}</h3>
