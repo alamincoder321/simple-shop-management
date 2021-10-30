@@ -39,7 +39,7 @@
                   </li>
 
                   <li class="has_sub">
-                      <a class="waves-effect @yield('order')"><i class="ion-person-stalker"></i><span> Order </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                      <a class="waves-effect @yield('order')"><i class="md md-palette"></i><span> Order </span><span class="pull-right"><i class="md md-add"></i></span></a>
                       <ul class="list-unstyled">
                           <li><a href="{{route('order.index')}}">Order-details</a></li>
                       </ul>
@@ -62,7 +62,7 @@
                   </li>
 
                   <li class="has_sub">
-                      <a class="waves-effect @yield('brand')"><i class="ion-person-stalker"></i><span> Brand </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                      <a class="waves-effect @yield('brand')"><i class="md md-palette"></i><span> Brand </span><span class="pull-right"><i class="md md-add"></i></span></a>
                       <ul class="list-unstyled">
                           <li><a href="{{route('brand.create')}}">Add Brand</a></li>
                           <li><a href="{{route('brand.index')}}">Brand list</a></li>
@@ -70,7 +70,7 @@
                   </li>
 
                   <li class="has_sub">
-                      <a class="waves-effect @yield('category')"><i class="ion-person-stalker"></i><span> Category </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                      <a class="waves-effect @yield('category')"><i class="md md-palette"></i><span> Category </span><span class="pull-right"><i class="md md-add"></i></span></a>
                       <ul class="list-unstyled">
                           <li><a href="{{route('category.create')}}">Add Category</a></li>
                           <li><a href="{{route('category.index')}}">Category list</a></li>
@@ -78,7 +78,7 @@
                   </li>
 
                   <li class="has_sub">
-                      <a class="waves-effect @yield('product')"><i class="ion-person-stalker"></i><span> Product </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                      <a class="waves-effect @yield('product')"><i class="md md-palette"></i><span> Product </span><span class="pull-right"><i class="md md-add"></i></span></a>
                       <ul class="list-unstyled">
                           <li><a href="{{route('product.create')}}">Add Product</a></li>
                           <li><a href="{{route('product.index')}}">Product list</a></li>
