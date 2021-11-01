@@ -22,27 +22,49 @@
                     <h3 class="panel-title">Add Brand</h3>
                 </div>
                 <div class="panel-body">
-                    <div class=" form">
-                        <form class="cmxform form-horizontal tasi-form" method="POST" action="{{route('brand.store')}}" novalidate="novalidate">
-                            @csrf
-                            <div class="form-group ">
-                                <label class="control-label col-lg-2">Brand Name</label>
-                                <div class="col-lg-10">
-                                    <input type="text" name="name" class=" form-control" autocomplete="off">
-                                    @if ($errors->has('name'))
-                                    <span class="text-danger">{{$errors->first('name')}}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
-                                    <button class="btn btn-success waves-effect waves-light pull-right" type="submit">Add Brand</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div> <!-- .form -->
+                    <div class="form-group ">
+                        <label class="control-label col-lg-2">Brand Name</label>
+                        <div class="col-lg-10">
+                            <input type="text" id="name" class=" form-control" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-success waves-effect waves-light pull-right brandAdd" type="submit">Add Brand</button>
+                        </div>
+                    </div>
                 </div> <!-- panel-body -->
             </div> <!-- panel -->
         </div> <!-- col -->
     </div>
 @endsection
+
+@push('js')
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function clear(){
+        $('#name').val("");
+    }
+
+    $(".brandAdd").click(function(){
+        var name = $('#name').val();
+
+        $.ajax({
+            method: "POST",
+            datatype: "json",
+            url: "/brand/",
+            data: {name:name},
+            success: function(data){
+                alertify.set('notifier','position', 'top-right');
+                alertify.success('Successfully added data.');
+                clear();
+            }
+        })
+    })
+</script>
+@endpush

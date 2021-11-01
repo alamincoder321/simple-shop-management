@@ -23,6 +23,12 @@
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 {!! Toastr::message() !!}
 
+<!-- ajax alert cdn -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<!--alertify JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 <!-- sweet alert cdn -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -57,3 +63,5 @@
         $('#datatable').dataTable();
     } );
 </script>
+
+@stack('js')

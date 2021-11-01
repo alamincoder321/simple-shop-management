@@ -57,8 +57,7 @@ class CategoryController extends Controller
         $category->created_at = Carbon::now();
         $category->save();
 
-        Toastr::success('Category added successfully!');
-        return back();
+        return response()->json();
     }
 
     /**
@@ -81,7 +80,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-        return view('category.edit', compact('category'));
+        return response()->json($category);
     }
 
     /**
@@ -102,8 +101,7 @@ class CategoryController extends Controller
         $category->updated_at = Carbon::now();
         $category->update();
 
-        Toastr::success('Category update successfully!');
-        return redirect()->route('category.index');
+        return response()->json();
     }
 
     /**

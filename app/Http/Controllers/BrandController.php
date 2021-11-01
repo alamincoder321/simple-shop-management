@@ -81,7 +81,7 @@ class BrandController extends Controller
     public function edit($id)
     {
         $brand = Brand::findOrFail($id);
-        return view('brand.edit', compact('brand'));
+        return response()->json($brand);
     }
 
     /**
@@ -102,8 +102,7 @@ class BrandController extends Controller
         $brand->updated_at = Carbon::now();
         $brand->update();
 
-        Toastr::success('Brand update successfully!');
-        return redirect()->route('brand.index');
+        return response()->json($brand);
     }
 
     /**

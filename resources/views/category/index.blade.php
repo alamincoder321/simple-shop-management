@@ -45,7 +45,7 @@
                                             <a href="{{route ('category.active', $category->id)}}" class="btn btn-danger btn-sm"><i class="ion-close-round"></i></a>
                                           @endif
 
-                                          <a href="{{route ('category.edit', $category->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                          <a  data-id="{{$category->id}}"  class="btn btn-info btn-sm categoryShow" data-toggle="modal" data-target="#con-close-modal"><i class="fa fa-edit"></i></a>
 
                                           <a href="javascript:;" data-id="{{$category->id}}" class="btn btn-warning btn-sm swal-confirm"><i class="fa fa-trash"></i></a>
                                               <form action="{{route ('category.destroy', $category->id)}}" id="delete{{$category->id}}" method="POST">
@@ -67,4 +67,81 @@
         
     </div> <!-- End Row -->
 
+
+<!-- Modal -->
+<div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog"> 
+        <div class="modal-content"> 
+            <div class="modal-header"> 
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> 
+                <h4 class="modal-title">UPDATE CATEGORY</h4> 
+            </div> 
+            <div class="modal-body"> 
+                <div class="row"> 
+                    <div class="col-md-12">
+                    <input type="hidden" class="item_id"> 
+                        <div class="form-group"> 
+                            <label for="field-1" class="control-label">Category Name</label> 
+                            <input type="text" class="form-control" id="name" autocomplete="off"> 
+                        </div>                             
+                    </div>
+                </div>
+            </div> 
+            <div class="modal-footer"> 
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button> 
+                <button type="submit" class="btn btn-info waves-effect waves-light categoryUpdate">Update</button> 
+            </div> 
+        </div> 
+    </div>
+</div><!-- /.modal -->
+
 @endsection
+
+
+@push('js')
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function clear(){
+        $('#name').val("");
+    }
+
+    $(".categoryShow").click(function(){
+        var id = $(this).data('id');
+        $.ajax({
+            method: "GET",
+            url: "/category/"+id+"/edit",
+            data: {"id":id},
+            datatype:"json",
+            success: function(data){
+                console.log(data);
+                $('.item_id').val(data.id);
+                $('#name').val(data.name);
+            }
+        })
+    })
+
+    $(".categoryUpdate").click(function(){
+        var id = $(".item_id").val();
+        var name = $('#name').val();
+
+        $.ajax({
+            method: "PUT",
+            datatype: "json",
+            url: "/category/"+id,
+            data: {name:name},
+            success: function(data){
+                alertify.set('notifier','position', 'top-right');
+                alertify.success('Successfully Update data.');
+                $("#con-close-modal").remove();
+                window.location.reload();
+            }
+        })
+    })
+
+</script>
+@endpush
