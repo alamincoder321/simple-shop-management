@@ -34,7 +34,6 @@
                                     <button class="btn btn-success waves-effect waves-light pull-right categoryAdd" type="submit">Add Category</button>
                                 </div>
                             </div>
-                        </form>
                     </div> <!-- .form -->
                 </div> <!-- panel-body -->
             </div> <!-- panel -->

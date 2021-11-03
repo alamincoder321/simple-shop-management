@@ -63,8 +63,7 @@ class CustomerController extends Controller
         $customer->created_at = Carbon::now();
         $customer->save();
 
-        Toastr::success('Customer added successfully!');
-        return back();
+        return response()->json($customer);
     }
 
     /**
@@ -87,7 +86,7 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $customer = Customer::findOrFail($id);
-        return view('customer.edit', compact('customer'));
+        return response()->json($customer);
     }
 
     /**
@@ -114,8 +113,7 @@ class CustomerController extends Controller
         $customer->updated_at = Carbon::now();
         $customer->update();
 
-        Toastr::success('Customer update successfully!');
-        return redirect()->route('customer.index');
+        return response()->json();
         
     }
 

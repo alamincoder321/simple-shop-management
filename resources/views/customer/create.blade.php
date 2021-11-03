@@ -23,55 +23,80 @@
                 </div>
                 <div class="panel-body">
                     <div class=" form">
-                        <form class="cmxform form-horizontal tasi-form" method="POST" action="{{route('customer.store')}}" novalidate="novalidate">
-                            @csrf
                             <div class="form-group ">
                                 <label class="control-label col-lg-2">Customer Name</label>
                                 <div class="col-lg-10">
-                                    <input type="text" name="name" class=" form-control" autocomplete="off">
-                                    @if ($errors->has('name'))
-                                    <span class="text-danger">{{$errors->first('name')}}</span>
-                                    @endif
+                                    <input type="text" id="name" class=" form-control" autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="form-group ">
                                 <label class="control-label col-lg-2">City</label>
                                 <div class="col-lg-10">
-                                    <input type="text" name="city" class="form-control" autocomplete="off">
-                                    @if ($errors->has('city'))
-                                    <span class="text-danger">{{$errors->first('city')}}</span>
-                                    @endif
+                                    <input type="text" id="city" class="form-control" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="control-label col-lg-2">Village</label>
                                 <div class="col-lg-10">
-                                    <input type="text" name="village" class="form-control" autocomplete="off">
-                                    @if ($errors->has('village'))
-                                    <span class="text-danger">{{$errors->first('village')}}</span>
-                                    @endif
+                                    <input type="text" id="village" class="form-control" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="control-label col-lg-2">Phone Number</label>
                                 <div class="col-lg-10">
-                                    <input type="text" name="phone" class="form-control" autocomplete="off">
-                                    @if ($errors->has('phone'))
-                                    <span class="text-danger">{{$errors->first('phone')}}</span>
-                                    @endif
+                                    <input type="text" id="phone" class="form-control" autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
-                                    <button class="btn btn-success waves-effect waves-light pull-right" type="submit">Add Customer</button>
+                                    <button class="btn btn-success waves-effect waves-light pull-right customerAdd" type="submit">Add Customer</button>
                                 </div>
                             </div>
-                        </form>
                     </div> <!-- .form -->
                 </div> <!-- panel-body -->
             </div> <!-- panel -->
         </div> <!-- col -->
     </div>
 @endsection
+
+@push('js')
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function clear(){
+        $('#name').val("");        
+        $('#city').val("");
+        $('#village').val("");
+        $('#phone').val("");
+    }
+
+    $(".customerAdd").click(function(){
+        var name = $('#name').val();
+        var city = $('#city').val();
+        var village = $('#village').val();
+        var phone = $('#phone').val();
+        
+        $.ajax({
+            method: "POST",
+            datatype: "json",
+            url: "/customer/",
+            data: {name:name,
+                    city:city,
+                    village:village,
+                    phone:phone},
+            success: function(data){
+                console.log(data.name);
+                alertify.set('notifier','position', 'top-right');
+                alertify.success('Successfully added data.');
+                clear();
+            }
+        })
+    })
+</script>
+@endpush
